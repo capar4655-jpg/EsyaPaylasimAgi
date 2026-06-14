@@ -17,16 +17,18 @@ import { getStorage } from 'firebase/storage';
 //  (Bu anahtarlar gizli değildir; güvenlik Firestore/Storage kurallarıyla sağlanır.)
 // ============================================================================
 export const firebaseConfig = {
-  apiKey: 'BURAYA_API_KEY',
-  authDomain: 'BURAYA_PROJE.firebaseapp.com',
-  projectId: 'BURAYA_PROJE_ID',
-  storageBucket: 'BURAYA_PROJE.appspot.com',
-  messagingSenderId: 'BURAYA_SENDER_ID',
-  appId: 'BURAYA_APP_ID',
+  apiKey: "AIzaSyByqQKMqFKA1ARKFsvvYgHb2nhHI9uE-00",
+  authDomain: "esyapaylasimagi.firebaseapp.com",
+  projectId: "esyapaylasimagi",
+  storageBucket: "esyapaylasimagi.firebasestorage.app",
+  messagingSenderId: "719438216402",
+  appId: "1:719438216402:web:10d07bf7a8efa819bc010b",
+  measurementId: "G-36J9RQ2FGD"
 };
 
 /** Config henüz doldurulmadıysa false döner (uygulama kurulum ekranı gösterir). */
 export const isFirebaseConfigured =
+  !!firebaseConfig.apiKey &&
   !firebaseConfig.apiKey.startsWith('BURAYA') &&
   !firebaseConfig.projectId.startsWith('BURAYA');
 
