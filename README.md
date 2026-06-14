@@ -20,6 +20,28 @@ Sürdürülebilir tüketimi teşvik eden, komşuları bir araya getiren bir **Re
 
 ---
 
+## 📸 Ekran Görüntüleri
+
+<table>
+  <tr>
+    <td align="center"><b>Keşfet (Harita)</b><br/><img src="screenshots/01-kesfet.jpg" width="220"/></td>
+    <td align="center"><b>Eşyalarım</b><br/><img src="screenshots/02-esyalarim.jpg" width="220"/></td>
+    <td align="center"><b>Eşya Detayı</b><br/><img src="screenshots/03-esya-detay.jpg" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Talep (Onay)</b><br/><img src="screenshots/04-talep.jpg" width="220"/></td>
+    <td align="center"><b>QR ile Teslim</b><br/><img src="screenshots/05-qr-kod.jpg" width="220"/></td>
+    <td align="center"><b>QR Kodu Tara</b><br/><img src="screenshots/06-qr-tara.jpg" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Sohbet</b><br/><img src="screenshots/07-sohbet.jpg" width="220"/></td>
+    <td align="center"><b>Talepler</b><br/><img src="screenshots/08-talepler.jpg" width="220"/></td>
+    <td align="center"><b>Profil & Rozetler</b><br/><img src="screenshots/09-profil.jpg" width="220"/></td>
+  </tr>
+</table>
+
+---
+
 ## 🛠️ Teknoloji Yığını
 
 | Katman | Teknoloji |
