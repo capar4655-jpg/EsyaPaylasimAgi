@@ -124,4 +124,6 @@ firestore.rules          # Firestore güvenlik kuralları
 
 ## 👤 Geliştirici
 
+**Atakan Çapar**
+
 Bu proje bir start-up fikir havuzu ödevi kapsamında geliştirilmiştir — **CircularShare (Eşya Paylaşım Ağı)**.
