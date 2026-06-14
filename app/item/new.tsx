@@ -129,7 +129,10 @@ export default function NewItemScreen() {
         />
 
         <Field label="Kategori">
-          <View style={styles.chips}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.chipsRow}>
             {CATEGORY_ORDER.map((c) => (
               <Chip
                 key={c}
@@ -138,7 +141,7 @@ export default function NewItemScreen() {
                 onPress={() => setCategory(c)}
               />
             ))}
-          </View>
+          </ScrollView>
         </Field>
 
         <Field label="Paylaşım türü">
@@ -231,6 +234,7 @@ const styles = StyleSheet.create({
   photoText: { color: C.muted, fontSize: 14 },
   fieldLabel: { fontSize: 14, fontWeight: '600', color: C.text },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  chipsRow: { gap: 8, paddingVertical: 2, paddingRight: 8 },
   locationBox: {
     flexDirection: 'row',
     alignItems: 'center',

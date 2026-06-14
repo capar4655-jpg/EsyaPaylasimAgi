@@ -14,7 +14,9 @@ export function Chip({
     <Pressable
       onPress={onPress}
       style={[styles.chip, active ? styles.chipActive : styles.chipIdle]}>
-      <Text style={[styles.text, active ? styles.textActive : styles.textIdle]}>
+      <Text
+        numberOfLines={1}
+        style={[styles.text, active ? styles.textActive : styles.textIdle]}>
         {label}
       </Text>
     </Pressable>
