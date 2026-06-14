@@ -1,10 +1,9 @@
-import { useHeaderHeight } from '@react-navigation/elements';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import {
   FlatList,
-  KeyboardAvoidingView,
+  Keyboard,
   Platform,
   Pressable,
   StyleSheet,
@@ -21,8 +20,8 @@ import type { ChatMessage } from '@/types';
 export default function ChatScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { user, profile } = useAuth();
-  const headerHeight = useHeaderHeight();
   const insets = useSafeAreaInsets();
+  const [kbHeight, setKbHeight] = useState(0);
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [otherName, setOtherName] = useState('Sohbet');
@@ -39,6 +38,23 @@ export default function ChatScreen() {
     });
     return unsub;
   }, [id, user?.uid]);
+
+  // Klavye yüksekliğini dinle (edge-to-edge Android'de KeyboardAvoidingView
+  // güvenilir çalışmadığı için içeriği elle yukarı itiyoruz)
+  useEffect(() => {
+    const showEvt =
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hideEvt =
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    const showSub = Keyboard.addListener(showEvt, (e) =>
+      setKbHeight(e.endCoordinates.height)
+    );
+    const hideSub = Keyboard.addListener(hideEvt, () => setKbHeight(0));
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
+  }, []);
 
   // En yeni altta görünsün diye ters çevirip inverted liste kullanıyoruz
   const reversed = useMemo(() => [...messages].reverse(), [messages]);
@@ -63,13 +79,11 @@ export default function ChatScreen() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: C.bg }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={headerHeight}>
+    <View style={{ flex: 1, backgroundColor: C.bg, paddingBottom: kbHeight }}>
       <Stack.Screen options={{ title: otherName }} />
 
       <FlatList
+        style={styles.flex}
         data={reversed}
         keyExtractor={(m) => m.id}
         inverted
@@ -103,7 +117,11 @@ export default function ChatScreen() {
         }
       />
 
-      <View style={[styles.inputBar, { paddingBottom: insets.bottom + 12 }]}>
+      <View
+        style={[
+          styles.inputBar,
+          { paddingBottom: kbHeight > 0 ? 12 : insets.bottom + 12 },
+        ]}>
         <TextInput
           style={styles.input}
           placeholder="Mesaj yaz..."
@@ -119,11 +137,12 @@ export default function ChatScreen() {
           <Ionicons name="send" size={20} color={C.white} />
         </Pressable>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  flex: { flex: 1 },
   list: { padding: 16, gap: 8, flexGrow: 1 },
   bubbleRow: { flexDirection: 'row', marginVertical: 2 },
   rowMine: { justifyContent: 'flex-end' },
