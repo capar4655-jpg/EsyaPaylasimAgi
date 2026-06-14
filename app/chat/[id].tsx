@@ -12,6 +12,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { C } from '@/constants/colors';
 import { useAuth } from '@/context/auth';
 import { getChat, sendMessage, subscribeMessages } from '@/lib/firestore';
@@ -21,6 +22,7 @@ export default function ChatScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { user, profile } = useAuth();
   const headerHeight = useHeaderHeight();
+  const insets = useSafeAreaInsets();
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [otherName, setOtherName] = useState('Sohbet');
@@ -101,7 +103,7 @@ export default function ChatScreen() {
         }
       />
 
-      <View style={styles.inputBar}>
+      <View style={[styles.inputBar, { paddingBottom: insets.bottom + 12 }]}>
         <TextInput
           style={styles.input}
           placeholder="Mesaj yaz..."
@@ -152,7 +154,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     gap: 10,
-    padding: 12,
+    paddingHorizontal: 12,
+    paddingTop: 12,
     borderTopWidth: 1,
     borderTopColor: C.border,
     backgroundColor: C.card,
